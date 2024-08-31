@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get FCM Device Token</title>
+    <!-- Include Firebase SDKs -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-app.js';
+        import { getMessaging, getToken, onMessage } from 'https://www.gstatic.com/firebasejs/9.8.0/firebase-messaging.js';
+
+       
+        
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+            apiKey: "AIzaSyAvqmWLb-N_FjPYsbWHvbUQ-mRGafccQkM",
+            authDomain: "quick-commerce-web.firebaseapp.com",
+            projectId: "quick-commerce-web",
+            storageBucket: "quick-commerce-web.appspot.com",
+            messagingSenderId: "668751034945",
+            appId: "1:668751034945:web:b66f7de0ba57d2d0c824c0",
+            measurementId: "G-0ZG3QDSNSH"
+
+            };
+    
+            // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const messaging = getMessaging(app);
+
+        // Request permission and get token
+        async function requestPermissionAndGetToken() {
+            try {
+                console.log('Requesting notification permission...');
+                await Notification.requestPermission();
+                const token = await getToken(messaging);
+                console.log('FCM Token:', token);
+                // You can also send this token to your server if needed
+            } catch (error) {
+                console.error('Error getting permission or token:', error);
+            }
+        }
+
+        requestPermissionAndGetToken();
+    </script>
+</head>
+<body>
+    <h1>Get FCM Device Token</h1>
+    <p>Open the console to see your device token.</p>
+</body>
+</html>
